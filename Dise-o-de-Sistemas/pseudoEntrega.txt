@@ -1,0 +1,75 @@
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------TP INTEGRADOR-----------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+
+
+
+clase Usuario
+	atributo user :int
+	atributo nombre :string
+	atributo apellido :string
+	atributo pass :string
+	atributo sexo :char
+	atributo fecha_alta :int
+	atributo email :string
+	atributo edad :int
+	
+	metodo iniciarSesion(user:int, pass:int)
+	if control user y pass 
+	then
+		mensaje "Bienvenido al sistema"
+	else
+		error "Ingreso incorrecto"
+	fin	
+	
+fin
+	
+
+
+
+
+clase Administrador [hereda Usuario]  
+  
+	atributo  id_Administrador :int
+	atributo  partidosCreados :string
+  
+	metodo crearPartido ( unPartido:int)
+		unPartido.canchaDesingada()
+		agregar unPartido a partidosCreados 
+	fin
+	metodo eliminarPartido (unPartido:int)
+		eliminar unPartido de partidosCreados
+	fin
+fin
+
+clase Jugadores [hereda Usuario]
+
+	atributo id_jugador :int
+	atributo tipo_jugador :string
+	
+	metodo inscribirseAPartido(unPartido:int, id_jugador:int)
+		agregar id_jugador a unPartido.jugadores_inscriptos
+	fin
+	metodo desinscribirseAPartido(unPartido:int, id_jugador:int)
+		eliminar id_jugador de unPartido.jugadores_inscriptos
+	fin
+	metodo registrarseAlSistema()
+		setear atributos
+		agregar self a Administrador.usuariosRegistrados
+	fin
+fin
+
+clase Partido
+
+	atributo fecha_Partido :int
+	atributo horario :int
+	atributo id_Partido :int
+	atributo jugadores_inscriptos :int
+	atributo nro_de_cancha :int
+
+	metodo canchaDesignada(unaCancha:int)
+		asignar unaCancha a nro_de_cancha
+	fin
+	
