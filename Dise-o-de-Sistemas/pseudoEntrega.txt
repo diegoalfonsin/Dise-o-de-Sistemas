@@ -48,12 +48,37 @@ clase Jugadores [hereda Usuario]
 
 	atributo id_jugador :int
 	atributo tipo_jugador :string
+	atributo amigos :string
+	atrubuto penalizacion :boolean
 	
 	metodo inscribirseAPartido(unPartido:int, id_jugador:int)
+		cuando size unPartido.jugadores_inscriptos < 10 entonces [
 		agregar id_jugador a unPartido.jugadores_inscriptos
+		mail := Mail new
+		stubMailSender.enviarALista(mail,amigos)
+			cuando size unPartido.jugadores_inscriptos = 10 entonces [
+			mailAdmin := Mail new
+			stubMailSender.notificacionAdminstrador(mailAdmin)
+		]
+		]
 	fin
-	metodo desinscribirseAPartido(unPartido:int, id_jugador:int)
+
+
+	metodo bajaDeUnPartido(unPartido:int, id_jugador:int)
+		cuando size unPartido.jugadores_inscriptos = 10 entonces confirmado=True
 		eliminar id_jugador de unPartido.jugadores_inscriptos
+		jugadorQueReemplaza := ()
+		cuando jugadorQueReemplaza=NULL entonces [
+			cuando confirmado=True entonces[
+				mailAdmin := Mail new
+				stubMailSender.notificacionAdminstrador(mail)
+				]
+			penalizacion := True
+			] 
+		else [
+			agregar jugadorReemplazo a unPartido.jugadores_inscriptos	
+			]
+	
 	fin
 	metodo registrarseAlSistema()
 		setear atributos
@@ -71,5 +96,14 @@ clase Partido
 
 	metodo canchaDesignada(unaCancha:int)
 		asignar unaCancha a nro_de_cancha
+	fin
+
+clase Mail
+
+	atributo from :string
+	atributo to :string
+	atributo asunto :string
+	atributo mensajes :string
+		
 	fin
 	
