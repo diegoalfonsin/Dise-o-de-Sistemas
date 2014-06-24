@@ -35,13 +35,19 @@ clase Administrador [hereda Usuario]
 	atributo  id_Administrador :int
 	atributo  partidosCreados :string
   
-	metodo crearPartido ( unPartido:int)
+	metodo crearPartido ( unPartido:Partido)
 		unPartido.canchaDesingada()
 		agregar unPartido a partidosCreados 
 	fin
 	metodo eliminarPartido (unPartido:int)
 		eliminar unPartido de partidosCreados
 	fin
+	
+	metodo aceptarSolicitud(unaSolicitud:Solicitud) 
+		unaPropuesta.aceptar()
+	fin
+
+	
 fin
 
 clase Jugadores [hereda Usuario]
@@ -84,6 +90,13 @@ clase Jugadores [hereda Usuario]
 		setear atributos
 		agregar self a Administrador.usuariosRegistrados
 	fin
+
+	metodo calificatePor(jugadorCalificador, partidoCalificado, nota, critica)
+		Calificacion calificacion = new Calificacion(jugadorCalificador, partidoCalificado, nota, string)
+		calificaciones agregar calificacion
+	fin
+	
+	
 fin
 
 clase Partido
@@ -97,6 +110,11 @@ clase Partido
 	metodo canchaDesignada(unaCancha:int)
 		asignar unaCancha a nro_de_cancha
 	fin
+	metodo calificarA(jugadorCalificado, jugadorCalifica, nota, critica)
+		jugadorCalificado.calificatePor(jugadorCalifica,this,nota,cirtica)
+	fin
+	
+fin
 
 clase Mail
 
@@ -105,5 +123,16 @@ clase Mail
 	atributo asunto :string
 	atributo mensajes :string
 		
+fin
+
+clase Solicitud
+	atributo partido:Partido
+	atributo usuario:Usuario
+	
+	metodo aceptar()
+		partido.inscribirA(usuario)
 	fin
+	
+fin
+
 	
