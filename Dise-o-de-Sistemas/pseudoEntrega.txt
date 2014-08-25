@@ -46,8 +46,14 @@ clase Administrador [hereda Usuario]
 	metodo aceptarSolicitud(unaSolicitud:Solicitud) 
 		unaPropuesta.aceptar()
 	fin
-
 	
+	metodo generarEquiposTentativos(unPartido:Partido)
+		unPartido.armarEquiposTentativos()
+	fin
+	
+	metodo seleccionarNivelJugador(unJugador:Jugadores, nivel)
+		unJugador.nivelDeJuego:= nivel
+	fin
 fin
 
 clase Jugadores [hereda Usuario]
@@ -114,8 +120,64 @@ clase Partido
 		jugadorCalificado.calificatePor(jugadorCalifica,this,nota,cirtica)
 	fin
 	
+	metodo armarEquiposTentativos()
+		confirmarJugadores()
+		ordenarConfirmados()
+		distribuirEquipos()
+	fin
+	
+	metodo ordenarConfirmados()
+		criterioOrden.ordenador(jugadores_confirmados)
+	fin
+	
+	metodo distribuirEquipos()
+		criterioDistribucion.distribuirEquipos(jugadores_confirmados, equipo1, equipo2)
+	fin
 fin
 
+Clase PorHandicap [hereda CriterioDeOrden]
+	metodo ordenador(listaJugadores:int)
+		sort(jugador, jugador.nivelDeJuego(), listaJugadores)
+	fin
+fin
+
+Clase PorPromedioCalificacionNPartidos [hereda CriterioDeOrden]
+	metodo ordenador(listaJugadores:int)
+		sort(jugador, jugador.promedioCalificacionesNPartidos(cantidadCalificaciones), listaJugadores)
+	fin
+fin
+
+Clase PorCalificacionUltimoPartido [hereda CriterioDeOrden]
+	metodo ordenador(listaJugadores:int)
+		sort(jugador, jugador.calificacionUltimoPartido(), listaJugadores)
+	fin
+fin
+
+Clase CriterioMixto [hereda CriterioDeOrden]
+	metodo ordenador(listaJugadores:int)
+		n:= 0
+		while n < (cantidad listaCriterios)
+			(listaCriterios at: n).ordenador()
+			n := n+1
+		fin
+	fin
+fin
+
+Clase ParImpar [hereda CriterioDeDistribucion]
+	metodo distribuir(listaJugadores, equipo1, equipo2)
+		i := 0
+		while i<>10
+			i := i+1
+			if mod(i,2)=1 entonces
+				equipo 1 add (listaJugadores at: i)
+			fin
+			if mod(i,2)=0 entonces
+				equipo 2 add (listaJugadores at: i)
+			fin	
+		fin
+	fin
+fin
+	
 clase Mail
 
 	atributo from :string
