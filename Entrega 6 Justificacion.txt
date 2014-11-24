@@ -1,0 +1,17 @@
+Entrega 6
+
+Para el trabajo decidimos implementar una arquitectura de Cliente-Servidor que funcionara de forma centralizada.
+
+Elegimos esta arquitectura porque lo pensamos como un servidor en el que este hosteado el codigo, la interfaz, la base de datos de los usuarios, etc.
+y el cliente se conecta por medio del browser a la aplicación del server para desarrollar sus pedidos. (Adjunto va un Diagrama de la Arquitectura)
+
+Tambien creemos que esta Arquitectura de Software nos brinda las siguientes ventajas:
+
+-Fácil administración
+-Gran nivel de seguridad
+-División de tareas entre el Cliente y el Servidor .
+-Fácil mantenimiento: al estar distribuidas las funciones y responsabilidades entre varios ordenadores independientes, es posible reemplazar, reparar, actualizar,
+ o incluso trasladar un servidor, mientras que sus clientes no se verán afectados por ese cambio (o se afectarán mínimamente). 
+-Transparencia del diseño, a través de la organización de la información y la separación de responsabilidades.
+-Centralización del control hacia los accesos, recursos, disponibilidad, integridad y confidencialidad de la información.
+
